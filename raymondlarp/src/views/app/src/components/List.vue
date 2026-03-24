@@ -1,5 +1,5 @@
 <script setup>
-import { Bar } from 'vue-chartjs'
+
 import { ref, onMounted } from "vue"
 
 const data = ref([])

@@ -1,15 +1,15 @@
 <template>
     <div>
         <list></list>
-        <roblox></roblox>
+        <Barchart> </Barchart>
     </div>
 </template>
 
 <script setup>
 import list from "@/components/List.vue"
-import roblox from "@/components/roblox.vue"
+import Barchart from "./components/Barchart.vue";
 </script>
 
 <style scoped>
 
-</style>
+</style>  
