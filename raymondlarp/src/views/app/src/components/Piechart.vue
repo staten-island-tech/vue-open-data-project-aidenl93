@@ -1,17 +1,15 @@
 <script setup>
 import { ref, onMounted, computed } from "vue"
-import { Bar } from "vue-chartjs"
+import { Pie } from "vue-chartjs"
 import {
   Chart as ChartJS,
   Title,
   Tooltip,
   Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale
+  ArcElement
 } from "chart.js"
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
 const data = ref([])
 const error = ref(null)
@@ -31,11 +29,9 @@ onMounted(async () => {
 const chartData = computed(() => {
   if (!searchName.value) return null
 
-
   const filtered = data.value.filter(
     item => item.nm.toLowerCase() === searchName.value.toLowerCase()
   )
-
 
   const grouped = {}
 
@@ -56,7 +52,14 @@ const chartData = computed(() => {
       {
         label: `Count for "${searchName.value}"`,
         data: Object.values(grouped),
-        backgroundColor: "#42A5F5"
+        backgroundColor: [
+          "#42A5F5",
+          "#66BB6A",
+          "#FFA726",
+          "#EF5350",
+          "#AB47BC",
+          "#26C6DA"
+        ]
       }
     ]
   }
@@ -68,7 +71,7 @@ const chartOptions = {
 </script>
 
 <template>
-  <h1>Baby Name by Ethnicity</h1>
+  <h1>Baby Name by Ethnicity (Pie Chart)</h1>
 
   <input
     v-model="searchName"
@@ -78,7 +81,7 @@ const chartOptions = {
 
   <p v-if="error">{{ error }}</p>
 
-  <Bar
+  <Pie
     v-if="chartData && chartData.labels.length"
     :data="chartData"
     :options="chartOptions"
@@ -86,6 +89,6 @@ const chartOptions = {
 
   <p v-else-if="searchName">No data found for that name</p>
 </template>
-<style scoped>
 
+<style scoped>
 </style>
